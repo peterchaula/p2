@@ -52,11 +52,15 @@ public class FcmPushService implements PushService {
             collapseKey = null;
         }
 
+        final AndroidConfig androidConfig =
+                AndroidConfig.builder()
+                        .setCollapseKey(collapseKey)
+                        .putData("priority", "high")
+                        .build();
         final Message.Builder message =
                 Message.builder()
                         .setToken(target.getToken())
-                        .setAndroidConfig(
-                                AndroidConfig.builder().setCollapseKey(collapseKey).build())
+                        .setAndroidConfig(androidConfig)
                         .putData("account", account);
         if (channel != null) {
             message.putData("channel", channel);
