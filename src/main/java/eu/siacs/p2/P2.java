@@ -84,8 +84,9 @@ public class P2 {
         while (true) {
             try {
                 component.connect();
+                Thread.currentThread().join();
                 return;
-            } catch (XmppException e) {
+            } catch (XmppException | InterruptedException e) {
                 System.err.println(e.getMessage());
             }
             Utils.sleep(RETRY_INTERVAL);
